@@ -121,6 +121,25 @@ function titleCase(str) {
 }
 
 
+/* ========================================== */
+/* Max Numbers ina 2D Array */
+function largestOfFour(arr) {
+    var maxNums = [];
+
+    for (var i = 0; i < arr, length; i++) {
+        var maxNum = arr[i][0];
+
+        for (var j = 0; j < arr[i].length; j++) {
+            var currentElem = arr[i][j];
+
+            if (currentElem >= maxNum) {
+                maxNum = currentElem;
+            }
+        }
+        maxNums.push(maxNum);
+    }
+    return maxNums;
+}
 
 
 
