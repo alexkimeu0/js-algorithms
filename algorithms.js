@@ -143,12 +143,36 @@ function largestOfFour(arr) {
 
 
 
+/* ========================================== */
+/* Spinal Tap Case */
+function spinalCase(str) {
+
+    return str.split('')
+        .map(c => /[A-Z]/.test(c) ? `-${c.toLowerCase()}` : c)
+        .join('')
+        .split(/[_ -]+/)
+        .filter(word => word.length)
+        .join('-');
+}
+
+spinalCase('This Is Spinal Tap');
 
 
 
+/* ========================================== */
+/* Pig Latin */
+const VOWELS = ['a', 'e', 'i', 'o', 'u'];
 
+const translatePigLatin = str => {
+    if (VOWELS.includes(str[0])) {
+        return `${str}way`;
+    }
+    if (str.split('').every(c => !VOWELS.includes(c))) {
+        return `${str}ay`
+    }
 
+    const consCluster = str.split(/[aeiou]/)[0];
+    return `${str.substring(consCluster.length)}${consCluster}ay`
+}
 
-
-
-
+translatePigLatin("consonant");
