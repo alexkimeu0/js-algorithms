@@ -176,3 +176,70 @@ const translatePigLatin = str => {
 }
 
 translatePigLatin("consonant");
+
+
+
+/* ========================================== */
+/* Missing Letter in an Array of Letters */
+function findMissingLetter(array) {
+    let ouput;
+    var str = array.join('');
+
+    for (let i = 0; i < str.length - 1; i++) {
+        const currCode = str.charCodeAt(i);
+        const nextCode = str.charCodeAt(i + 1);
+
+        if (nextCode - currCode !== 1) {
+            ouput = String.fromCharCode(currCode + 1);
+            break;
+        }
+    }
+    return ouput;
+}
+
+
+
+/* ========================================== */
+/* Sorted Union */
+function uniteUnique(arr) {
+
+    const arrOfArr = [...arguments];
+    const output = [];
+
+    for (const arr of arrOfArr) {
+        for (const b of arr) {
+            if (!output.includes(b)) {
+                output.push(b);
+            }
+        }
+    }
+    return output;
+}
+
+uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]);
+
+
+
+/* ========================================== */
+/* Convert to HTML Entities */
+const htmlDict = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&apos;'
+}
+function convertHTML(str) {
+    let output = '';
+
+    for (const c of str) {
+        if (c in htmlDict) {
+            output += htmlDict[c];
+        } else {
+            output += c;
+        }
+    }
+    return output;
+}
+
+convertHTML("Dolce & Gabbana");
