@@ -243,3 +243,221 @@ function convertHTML(str) {
 }
 
 convertHTML("Dolce & Gabbana");
+
+
+/* ========================================== */
+/* Odd Fibonacci */
+function sumFibs(num) {
+
+    let a = 1;
+    let b = 1;
+
+    let sum = 1;
+
+    while (b <= num) {
+        if (b % 2 !== 0) {
+            sum += b;
+        }
+        [a, b] = [b, a + b];
+    }
+    return sum;
+}
+
+sumFibs(4);
+
+
+
+/* ========================================== */
+/* Sum of Primes */
+function sumPrimes(num) {
+    if (num < 2) {
+        return 0;
+    }
+
+    const primes = [];
+
+    for (let i = 2; i <= num; i++) {
+        let isComposite = false;
+
+        for (const p of primes) {
+            if (i % p === 0) {
+                isComposite = true;
+                break;
+            }
+        }
+
+        if (!isComposite) {
+            primes.push(i);
+        }
+    }
+
+    let sum = 0;
+    for (const p of primes) {
+        sum += p;
+    }
+
+    return sum;
+}
+
+sumPrimes(10);
+
+
+
+/* ========================================== */
+/* Smallest Common Multiple */
+function smallestCommons(arr) {
+
+    const small = Math.min(...arr);
+    const big = Math.max(...arr);
+
+    let scm = big;
+
+    while (true) {
+        let IsScm = true;
+
+        for (let i = small; i <= big; i++) {
+            if (scm % i !== 0) {
+                IsScm = false;
+                break;
+            }
+        }
+
+        if (IsScm) {
+            return scm;
+        } else {
+            scm++;
+        }
+    }
+
+    return arr;
+}
+
+
+smallestCommons([1, 5]);
+
+
+
+/* ========================================== */
+/* Drop it */
+function dropElements(arr, func) {
+    let trueIndex = arr.findIndex(func);
+    if (trueIndex === -1) {
+        return [];
+    } else {
+        return arr.slice(trueIndex);
+    }
+}
+
+dropElements([1, 2, 3], function (n) { return n < 3; });
+
+
+
+
+/* ========================================== */
+/* Flatten Array */
+const flatten = arr => {
+    const result = [];
+    for (const el of arr) {
+        if (Array.isArray(el)) {
+            result.push(...el);
+        } else {
+            result.push(el);
+        }
+    }
+    return result;
+};
+
+
+function steamrollArray(arr) {
+    let result = arr;
+
+    while (true) {
+        let isFlat = true;
+        for (const el of result) {
+            if (Array.isArray(el)) {
+                isFlat = false;
+                result = flatten(result);
+                break;
+            }
+        }
+        if (isFlat) {
+            return result;
+        }
+    }
+}
+
+steamrollArray([1, [2], [3, [[4]]]]);
+
+
+
+/* ========================================== */
+/* Binary Agents */
+function binaryAgent(str) {
+    return str
+        .split(' ')
+        .map(el => String.fromCharCode(parseInt(el, 2)))
+        .join('');
+}
+
+binaryAgent("01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111");
+
+
+
+/* ========================================== */
+/* All Truthy */
+function truthCheck(collection, pre) {
+    let isTruthy = true;
+
+    for (const obj of collection) {
+        if (!obj[pre]) {
+            isTruthy = false;
+            break;
+        }
+
+    }
+    return isTruthy;
+}
+
+truthCheck([{ "user": "Tinky-Winky", "sex": "male" }, { "user": "Dipsy", "sex": "male" }, { "user": "Laa-Laa", "sex": "female" }, { "user": "Po", "sex": "female" }], "sex");
+
+
+
+/* ========================================== */
+/* Arguments Optional */
+const addTogether = (...args) => {
+    const [arg1, arg2] = args;
+
+    if (typeof arg1 !== 'number') {
+        return undefined;
+    }
+
+    if (arg2 === undefined) {
+        return num => typeof num !== 'number' ? undefined : arg1 + num;
+    }
+
+    if (typeof arg2 !== 'number') {
+        return undefined;
+    }
+    return arg1 + arg2;
+}
+
+addTogether(2, 3);
+
+
+/* ========================================== */
+/* Map the Debris */
+const GM = 398600.4418;
+const earthRadius = 6367.4447;
+
+const orbitalPeriod = arr => arr
+    .map(obj => ({
+        name: obj.name,
+        orbitalPeriod: Math.round(
+            2 * Math.PI * Math.sqrt(
+                Math.pow(earthRadius + obj.avgAlt, 3) /
+                GM
+            )
+        )
+    }));
+
+orbitalPeriod([{ name: "sputnik", avgAlt: 35873.5553 }]);
